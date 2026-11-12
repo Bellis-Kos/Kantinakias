@@ -1,0 +1,50 @@
+1. ΑΣΦΑΛΕΙΑ, SECRETS & ΔΕΔΟΜΕΝΑ 
+.env
+.env.*
+!.env.example
+secrets.*
+credentials.*
+config.local.*
+*.pem
+*.key
+*.crt
+
+# Τοπικές βάσεις δεδομένων
+*.db
+*.sqlite
+*.sqlite3
+
+2. IDEs & ΛΕΙΤΟΥΡΓΙΚΟ ΣΥΣΤΗΜΑ 
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+3. LOGS & ΠΡΟΣΩΡΙΝΑ ΑΡΧΕΙΑ
+*.log
+logs/
+tmp/
+temp/
+
+4. ΕΞΑΡΤΗΣΕΙΣ & BUILD FOLDERS
+Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Node.js / Web
+node_modules/
+dist/
+build/
+.next/
+
+# Java
+target/
+*.class
+*.jar
+.gradle/
