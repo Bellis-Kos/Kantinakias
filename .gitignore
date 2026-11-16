@@ -49,6 +49,9 @@ target/
 *.jar
 .gradle/
 
+# Personal Study Guide
+SECURITY_STUDY_GUIDE.md
+
 
 HELP.md
 target/
