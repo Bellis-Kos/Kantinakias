@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kantinakias - Store Menu</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f4f4f9; }
+        header { background-color: #790da1; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { margin: 0; font-size: 24px; cursor: pointer; }
+        .nav-buttons button { margin-left: 10px; padding: 8px 15px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; }
+
+        .store-banner { background-color: #520ca2; color: white; padding: 30px; text-align: center; }
+        .store-banner h2 { margin: 0 0 10px 0; font-size: 28px; }
+        .store-banner p { margin: 0; color: #ebc6df; }
+
+        /* Layout: Menu on the left, Cart on the right */
+        .main-layout { display: flex; gap: 30px; max-width: 1200px; margin: 30px auto; padding: 0 20px; align-items: flex-start; }
+        
+        /* Product List */
+        .menu-section { flex: 2; }
+        .menu-section h3 { color: #2c3e50; margin-top: 0; }
+        .product-card { background: rgb(191, 226, 226); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .product-info h4 { margin: 0 0 5px 0; font-size: 18px; color: #2c3e50; }
+        .product-info p { margin: 0 0 8px 0; color: #4a5568; font-size: 14px; }
+        .product-price { font-weight: bold; color: #790da1; font-size: 16px; }
+        .btn-add { background-color: #A42AD4; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-add:hover { background-color: #790da1; }
+
+        /* Shopping Cart */
+        .cart-section { flex: 1; background: #ebc6df; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 20px; }
+        .cart-section h3 { margin-top: 0; border-bottom: 2px solid rgba(121, 13, 161, 0.2); padding-bottom: 10px; color: #2c3e50; }
+        .cart-items { list-style: none; padding: 0; margin: 0 0 20px 0; }
+        .cart-items li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(121, 13, 161, 0.15); font-size: 15px; color: #2c3e50; }
+        .btn-remove { background: #520ca2; color: white; border: none; border-radius: 3px; cursor: pointer; padding: 2px 6px; margin-left: 8px; font-weight: bold; }
+        .btn-remove:hover { background: #790da1; }
+        .cart-total { font-size: 18px; font-weight: bold; display: flex; justify-content: space-between; margin-bottom: 20px; color: #2c3e50; }
+        .btn-order { width: 100%; padding: 12px; background-color: #790da1; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .btn-order:hover { background-color: #520ca2; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 onclick="location.href='index.html'">Kantinakias</h1>
+        <div class="nav-buttons">
+            <button onclick="location.href='index.html'">← Back to Stores</button>
+            <button onclick="location.href='login.html'">Login</button>
+        </div>
+    </header>
+
+    <div class="store-banner">
+        <h2 id="storeName">Loading...</h2>
+        <p id="storeDetails"></p>
+    </div>
+
+    <div class="main-layout">
+        <!-- Left Column: Menu (populated dynamically based on URL id) -->
+        <div class="menu-section">
+            <h3>Menu</h3>
+            <div id="menuList"></div>
+        </div>
+
+        <!-- Right Column: Cart -->
+        <div class="cart-section">
+            <h3>Your Order</h3>
+            <ul class="cart-items" id="cartList">
+                <li style="color: #4a5568; justify-content: center;">Your cart is empty</li>
+            </ul>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="totalPrice">0.00 €</span>
+            </div>
+            <button class="btn-order" onclick="submitOrder()">Submit Order</button>
+        </div>
+    </div>
+
+    <script>
+        // Mock database of stores & menus (will be replaced by Java API GET /api/stores/{id})
+        const storesData = {
+            "1": {
+                name: "MAKIS CANTINE",
+                details: "Kallithea | Burger + streetfood | Open now",
+                menu: [
+                    { name: "Special Street Burger", desc: "Double beef patty, cheddar, bacon, fried egg, fries & house sauce", price: 6.50 },
+                    { name: "Chicken Nuggets Portion", desc: "8 crispy chicken nuggets served with french fries and mustard sauce", price: 5.00 },
+                    { name: "Coca-Cola 330ml", desc: "Chilled can", price: 1.50 },
+                    { name: "Bottled Water 500ml", desc: "Chilled mineral water", price: 0.50 }
+                ]
+            },
+            "2": {
+                name: "Vegan Street",
+                details: "Exarchia | Vegan, Falafel | Open now",
+                menu: [
+                    { name: "Falafel Wrap", desc: "Crispy homemade falafel, hummus, tahini, tomato, lettuce & pickled turnips", price: 4.80 },
+                    { name: "Beyond Vegan Burger", desc: "Plant-based patty, vegan cheddar, caramelized onions, avocado mayo & fries", price: 7.20 },
+                    { name: "Coca-Cola 330ml", desc: "Chilled can", price: 1.50 },
+                    { name: "Bottled Water 500ml", desc: "Chilled mineral water", price: 0.50 }
+                ]
+            }
+        };
+
+        let cart = [];
+
+        // Read the ?id=... parameter from the URL (defaults to "1" if opened directly)
+        const urlParams = new URLSearchParams(window.location.search);
+        const storeId = urlParams.get("id") || "1";
+        const currentStore = storesData[storeId] || storesData["1"];
+
+        // Load store header and menu items on page load
+        function loadStore() {
+            document.getElementById("storeName").textContent = currentStore.name;
+            document.getElementById("storeDetails").textContent = currentStore.details;
+
+            const menuList = document.getElementById("menuList");
+            menuList.innerHTML = "";
+
+            currentStore.menu.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `
+                    <div class="product-info">
+                        <h4>${item.name}</h4>
+                        <p>${item.desc}</p>
+                        <span class="product-price">${item.price.toFixed(2)} €</span>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('${item.name}', ${item.price})">+ Add</button>
+                `;
+                menuList.appendChild(card);
+            });
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            renderCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartList = document.getElementById("cartList");
+            const totalPriceEl = document.getElementById("totalPrice");
+            cartList.innerHTML = "";
+
+            if (cart.length === 0) {
+                cartList.innerHTML = '<li style="color: #4a5568; justify-content: center;">Your cart is empty</li>';
+                totalPriceEl.textContent = "0.00 €";
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>
+                        ${item.price.toFixed(2)} €
+                        <button class="btn-remove" onclick="removeFromCart(${index})">x</button>
+                    </span>
+                `;
+                cartList.appendChild(li);
+            });
+
+            totalPriceEl.textContent = total.toFixed(2) + " €";
+        }
+
+        function submitOrder() {
+            if (cart.length === 0) {
+                alert("Please add at least one item to your cart first!");
+                return;
+            }
+            alert(`Your order from ${currentStore.name} (Total: ${document.getElementById("totalPrice").textContent}) has been sent!`);
+            cart = [];
+            renderCart();
+        }
+
+        // Run on page load
+        loadStore();
+    </script>
+
+</body>
+</html>
