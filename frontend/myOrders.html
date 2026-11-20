@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kantinakias - My Orders</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f4f4f9; }
+        header { background-color: #790da1; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { margin: 0; font-size: 24px; cursor: pointer; }
+        .nav-buttons button { margin-left: 10px; padding: 8px 15px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; }
+
+        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .page-header h2 { margin: 0; color: #2c3e50; }
+        .btn-refresh { background-color: #520ca2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-refresh:hover { background-color: #790da1; }
+
+        /* Order Cards */
+        .order-card { background: rgb(191, 226, 226); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .order-info h4 { margin: 0 0 6px 0; font-size: 18px; color: #2c3e50; }
+        .order-info p { margin: 0 0 6px 0; color: #4a5568; font-size: 14px; }
+        .order-total { font-weight: bold; color: #790da1; font-size: 16px; }
+
+        /* Status Badges */
+        .status-badge { padding: 8px 14px; border-radius: 20px; font-weight: bold; font-size: 14px; text-align: center; }
+        .status-preparing { background-color: #ebc6df; color: #790da1; border: 1px solid #790da1; }
+        .status-ready { background-color: #A42AD4; color: white; }
+        .status-completed { background-color: #2c3e50; color: white; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 onclick="location.href='index.html'">Kantinakias</h1>
+        <div class="nav-buttons">
+            <button onclick="location.href='index.html'">← Back to Stores</button>
+            <button onclick="location.href='login.html'">Login</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h2>My Orders</h2>
+            <button class="btn-refresh" onclick="refreshOrders()">↻ Refresh Status</button>
+        </div>
+
+        <!-- Example Orders (later fetched from Java API: GET /api/orders/my) -->
+        <div id="ordersList">
+            <div class="order-card">
+                <div class="order-info">
+                    <h4>Order #102 — MAKIS CANTINE</h4>
+                    <p>1x Special Street Burger, 1x Coca-Cola 330ml</p>
+                    <span class="order-total">Total: 8.00 €</span>
+                </div>
+                <span class="status-badge status-preparing">Preparing...</span>
+            </div>
+
+            <div class="order-card">
+                <div class="order-info">
+                    <h4>Order #98 — Vegan Street</h4>
+                    <p>1x Falafel Wrap, 1x Bottled Water 500ml</p>
+                    <span class="order-total">Total: 5.30 €</span>
+                </div>
+                <span class="status-badge status-ready">Ready for Pickup!</span>
+            </div>
+
+            <div class="order-card">
+                <div class="order-info">
+                    <h4>Order #85 — MAKIS CANTINE</h4>
+                    <p>1x Chicken Nuggets Portion</p>
+                    <span class="order-total">Total: 5.00 €</span>
+                </div>
+                <span class="status-badge status-completed">Completed</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function refreshOrders() {
+            // Later this will call GET /api/orders/my from the Java backend
+            alert("Checking for order status updates... Soon connected to the Java Back-End!");
+        }
+    </script>
+
+</body>
+</html>
