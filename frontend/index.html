@@ -6,25 +6,25 @@
     <title>Kantinakias</title>
     
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #b8bbbef1; }
         header { background-color: #790da1; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
         header h1 { margin: 0; font-size: 24px; }
-        .nav-buttons button { margin-left: 10px; padding: 8px 15px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; }
+        
+        .nav-buttons button { margin-left: 10px; padding: 8px 15px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; background: linear-gradient(135deg, #d35400, #800020); color: white; transition: opacity 0.2s ease; }
+        .nav-buttons button:hover { opacity: 0.50; }
         
         .container { padding: 30px; max-width: 1200px; margin: 0 auto; }
         
-        /* Search filters */
-        .filters { margin-bottom: 30px; background: rgb(191, 226, 226); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; gap: 15px; }
+        .filters { margin-bottom: 30px; background: rgba(191, 226, 226, 0.55); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; gap: 15px; }
         .filters input, .filters select, .filters button { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
         .filters button { background-color: #520ca2; color: white; border: none; cursor: pointer; font-weight: bold; }
-        .filters button:hover { background-color: #520ca2; }
+        .filters button:hover { background-color: #3d087a; }
         
-        /* Store List */
         .store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .store-card { background: rgb(191, 226, 226); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        .store-card { background: rgba(191, 226, 226, 0.55); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
         .store-card h3 { margin-top: 0; color: #2c3e50; }
-        .btn-menu { background-color: #A42AD4; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; border-radius: 5px; font-size: 16px; margin-top: 15px; }
-        .btn-menu:hover { background-color: #A42AD4; }
+        .btn-menu { background-color: #A42AD4; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; border-radius: 5px; font-size: 16px; margin-top: 15px; transition: background-color 0.2s ease; }
+        .btn-menu:hover { background-color: #790da1; }
     </style>
 </head>
 <body>
@@ -32,9 +32,10 @@
     <header>
         <h1>Kantinakias</h1>
         <div class="nav-buttons">
-            <button onclick="location.href='myOrders.html'">My Orders</button>
             <button onclick="location.href='login.html'">Login</button>
             <button onclick="location.href='register.html'">Register</button>
+            <button onclick="location.href='myOrders.html'">My Orders</button>
+            <button onclick="location.href='owner.html'">Owner Panel</button>
         </div>
     </header>
 

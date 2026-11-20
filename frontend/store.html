@@ -4,39 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kantinakias - Store Menu</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f4f4f9; }
+    <style>body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #d3d6db; }
         header { background-color: #790da1; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
         header h1 { margin: 0; font-size: 24px; cursor: pointer; }
-        .nav-buttons button { margin-left: 10px; padding: 8px 15px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; }
+        
+        .nav-buttons button { margin-left: 10px; padding: 8px 15px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; background: linear-gradient(135deg, #d35400, #800020); color: white; transition: opacity 0.2s ease; }
+        .nav-buttons button:hover { opacity: 0.85; }
 
-        .store-banner { background-color: #520ca2; color: white; padding: 30px; text-align: center; }
+        .store-banner { background-color: #2431a7; color: white; padding: 30px; text-align: center; }
         .store-banner h2 { margin: 0 0 10px 0; font-size: 28px; }
-        .store-banner p { margin: 0; color: #ebc6df; }
+        .store-banner p { margin: 0; color: #fafafa; }
 
-        /* Layout: Menu on the left, Cart on the right */
         .main-layout { display: flex; gap: 30px; max-width: 1200px; margin: 30px auto; padding: 0 20px; align-items: flex-start; }
         
-        /* Product List */
         .menu-section { flex: 2; }
         .menu-section h3 { color: #2c3e50; margin-top: 0; }
-        .product-card { background: rgb(191, 226, 226); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .product-card { background: rgba(191, 226, 226, 0.55); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
         .product-info h4 { margin: 0 0 5px 0; font-size: 18px; color: #2c3e50; }
         .product-info p { margin: 0 0 8px 0; color: #4a5568; font-size: 14px; }
         .product-price { font-weight: bold; color: #790da1; font-size: 16px; }
-        .btn-add { background-color: #A42AD4; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-add { background-color: #A42AD4; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background-color 0.2s ease; }
         .btn-add:hover { background-color: #790da1; }
 
-        /* Shopping Cart */
-        .cart-section { flex: 1; background: #ebc6df; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 20px; }
+        .cart-section { flex: 1; background: rgba(235, 198, 223, 0.65); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 20px; }
         .cart-section h3 { margin-top: 0; border-bottom: 2px solid rgba(121, 13, 161, 0.2); padding-bottom: 10px; color: #2c3e50; }
         .cart-items { list-style: none; padding: 0; margin: 0 0 20px 0; }
         .cart-items li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(121, 13, 161, 0.15); font-size: 15px; color: #2c3e50; }
-        .btn-remove { background: #520ca2; color: white; border: none; border-radius: 3px; cursor: pointer; padding: 2px 6px; margin-left: 8px; font-weight: bold; }
+        .btn-remove { background: #520ca2; color: white; border: none; border-radius: 3px; cursor: pointer; padding: 2px 6px; margin-left: 8px; font-weight: bold; transition: background-color 0.2s ease; }
         .btn-remove:hover { background: #790da1; }
         .cart-total { font-size: 18px; font-weight: bold; display: flex; justify-content: space-between; margin-bottom: 20px; color: #2c3e50; }
-        .btn-order { width: 100%; padding: 12px; background-color: #790da1; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        .btn-order:hover { background-color: #520ca2; }
+        
+        .btn-order { width: 100%; padding: 12px; background: linear-gradient(135deg, #d1749e, #b4153c); color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: opacity 0.2s ease; }
+        .btn-order:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
@@ -44,9 +43,10 @@
     <header>
         <h1 onclick="location.href='index.html'">Kantinakias</h1>
         <div class="nav-buttons">
-            <button onclick="location.href='myOrders.html'">My Orders</button>
             <button onclick="location.href='index.html'">← Back to Stores</button>
             <button onclick="location.href='login.html'">Login</button>
+            <button onclick="location.href='myOrders.html'">My Orders</button>
+            <button onclick="location.href='owner.html'">Owner Panel</button>
         </div>
     </header>
 
